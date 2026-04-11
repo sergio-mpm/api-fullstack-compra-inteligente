@@ -33,7 +33,7 @@
 
         <!-- LOGIN -->
         <div id="loginView" class="card p-4 col-md-4 mx-auto">
-            <img src="img/dollar-icon-transparent.png" alt="Contabilize" />
+            <img src="img/shopping-cart.png" alt="SmartBuy" />
             <h4>Login</h4>
             <input id="loginCpf" class="form-control mb-2" placeholder="CPF">
             <input id="loginSenha" class="form-control mb-2" placeholder="Senha">
@@ -50,7 +50,6 @@
                 <input id="registerUser" class="form-control mb-2" placeholder="Nome">
                 <input id="registerCpf" class="form-control mb-2" placeholder="CPF">
                 <input id="registerEmail" class="form-control mb-2" placeholder="E-mail">
-                <input id="registerDataNasc" class="form-control mb-2" placeholder="Data de Nascimento" type="date">
                 <input id="registerSenha" class="form-control mb-2" placeholder="Senha">
                 <button class="btn btn-success w-100" onclick="register()">Cadastrar</button>
             </div>
@@ -59,10 +58,64 @@
         <!-- APP -->
         <div id="appView" class="d-none">
 
-
-
+            <div class="card p-4 col-md-6 mx-auto">
+                <h4>Predição de Conversão</h4>
+                    <div class="row">
+                        <div class="col-md-6 mb-2">
+                            <label>Idade</label>
+                            <input id="age" type="number" class="form-control">
+                        </div>
+                        <div class="col-md-6 mb-2">
+                            <label>Renda Mensal</label>
+                            <input id="income" type="number" class="form-control">
+                        </div>
+                        <div class="col-md-6 mb-2">
+                            <label>Gênero</label>
+                            <select id="gender" class="form-control">
+                                <option value="male">Masculino</option>
+                                <option value="female">Feminino</option>
+                                <option value="other">Outro</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6 mb-2">
+                            <label>Dispositivo</label>
+                            <select id="device_type" class="form-control">
+                                <option value="mobile">Mobile</option>
+                                <option value="desktop">Desktop</option>
+                                <option value="tablet">Tablet</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6 mb-2">
+                            <label>Duração da Sessão (seg)</label>
+                            <input id="session_duration" type="number" class="form-control">
+                        </div>
+                        <div class="col-md-6 mb-2">
+                            <label>Páginas Visitadas</label>
+                            <input id="pages_visited" type="number" class="form-control">
+                        </div>
+                        <div class="col-md-6 mb-2">
+                            <label>Compras Anteriores</label>
+                            <input id="previous_purchases" type="number" class="form-control">
+                        </div>
+                        <div class="col-md-6 mb-2">
+                            <label>Cliques em Anúncios</label>
+                            <input id="ad_clicks" type="number" class="form-control">
+                        </div>
+                    </div>
+                <button class="btn btn-primary mt-3" onclick="predizer()">
+                    Predizer Conversão
+                </button>
+                <div id="resultado" class="alert alert-info mt-3 d-none"></div>
+            </div>
+            <div class="card mt-4 d-none" id="resultadoCard">
+                <div class="card-body">
+                    <h5 id="resultadoTitulo"></h5>
+                    <p id="resultadoProb"></p>
+                </div>
+            </div>
         </div>
     </div>
+    <script src="scripts.js"></script>
 </body>
 
 </html>

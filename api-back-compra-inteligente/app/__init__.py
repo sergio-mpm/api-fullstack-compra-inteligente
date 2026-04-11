@@ -1,12 +1,12 @@
 import os
+import werkzeug
 from flask_jwt_extended import JWTManager
 from flask_openapi3 import OpenAPI, Info
 from flask_cors import CORS
 from .config import Config
 from .extensions import db, migrate
 from .security import bearer_auth
-from .services import purchase_model_service
-from app.controllers.predicao_controller import predicao_bp
+
 
 
 def create_app():
@@ -26,19 +26,20 @@ def create_app():
     migrate.init_app(app, db)
 
     #Carga do Modelo
-    model_path = os.path.join(
-        os.path.dirname(__file__),
-        "model",
-        "modelo_final_ecommerce.pkl"
-    )
-
-    app.ml_model = purchase_model_service(model_path)
+    from app.services.purchase_model_service import PurchaseModelService
+    app.ml_model = PurchaseModelService()
 
     # importacao de rotas para realização do migrate
     # TO DO
+    from app.models import usuario
 
     # registro de rotas
-    app.register_blueprint(predicao_bp, url_prefix="/v1")
+    from app.controllers.predicao_controller import predicao_bp
+    from app.controllers.auth_controller import auth_bp
+    from app.controllers.usuario_controller import usuario_bp
+    app.register_api(usuario_bp)
+    app.register_api(predicao_bp)
+    app.register_api(auth_bp)
     # TO DO
 
     app.security = [{"bearerAuth": []}]

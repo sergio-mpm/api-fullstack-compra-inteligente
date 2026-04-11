@@ -2,7 +2,7 @@ from flask_jwt_extended import get_jwt_identity, jwt_required
 from flask_openapi3 import APIBlueprint, Tag
 from flask_openapi3 import openapi
 
-from app.schemas.predicao_schema import PredicaoSchema
+from app.schemas.predicao_schema import PredicaoSchema, PredicaoResponseSchema
 from app.schemas.error_schema import ErrorSchema
 from app.services.purchase_model_service import PurchaseModelService
 
@@ -22,14 +22,17 @@ service_predicao = PurchaseModelService()
 
 @predicao_bp.post(
     "/predizer",
-    responses={200: PredicaoSchema, 400: ErrorSchema}
+    responses={200: PredicaoResponseSchema, 400: ErrorSchema}
 )
+@jwt_required()
 def predizer_compra(body: PredicaoSchema):
     """
         Avalia uma predição de compra baseado no modelo existente
     """
 
     try:
-        return"OK"
+        result = service_predicao.predict(body.model_dump())
+        return result, 200
+    
     except ValueError as e:
         return {"message": str(e)}, 400

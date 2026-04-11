@@ -1,9 +1,12 @@
 from pydantic import BaseModel
 from typing import Optional, List
 
+
 class AuthSchema(BaseModel):
     cpf: str = "12345678900"
     senha: str = "senha123"
 
-class TokenSchema(BaseModel):
+
+class TokenResponseSchema(BaseModel):
     access_token: str
+    token_type: str = "Bearer"
