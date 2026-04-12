@@ -27,7 +27,7 @@ class Cliente(db.Model):
 
     usuario = db.relationship(
         "Usuario",
-        back_populates="cliente"
+        back_populates="clientes"
     )
 
     def __init__(self, age:float, gender:str, device_type:str, previous_purchases:float, cart_items:float, discount_seen:float, ad_clicked:float, returning_user:float, usuario_responsavel:str):

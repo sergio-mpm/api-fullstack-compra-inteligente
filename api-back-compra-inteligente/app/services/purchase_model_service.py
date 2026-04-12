@@ -8,22 +8,25 @@ class PurchaseModelService:
         base_dir = os.path.dirname(os.path.abspath(__file__))
         model_path = os.path.join(base_dir, "..", "models", "modelo_final_ecommerce.pkl")
         self.model = joblib.load(model_path)
-        self.highest_threshold = 0.87 # limiar decisivo
-        self.high_threshold = 0.72 # limiar alto de decisão
-        self.medium_threshold = 0.5 # limiar mediano de decisão
-        self.low_threshold = 0.36 # limiar baixo de decisão
+        self.highest_threshold = 0.99 # limiar decisivo
+        self.high_threshold = 0.98 # limiar alto de decisão
+        self.medium_threshold = 0.96 # limiar mediano de decisão
+        self.low_threshold = 0.94 # limiar baixo de decisão
     
     ### Os threshold foram definidos para criar faixas progressivas de propensão de compra
     ### Permite-se assim que hajam interações diferenciadas no frontend
     ### Em um caso de decisão de compra, isso permite avaliar opções dependendo da interpretação
 
     def predict(self, data: dict) -> dict:
-
+        cols_treinamento = [
+            "age", "gender", "device_type", "previous_purchases", 
+            "returning_user", "discount_seen", "ad_clicked", "cart_items"
+        ]
         # Transformando em dataframe
         df = pd.DataFrame([data])
+        df = df[cols_treinamento]
 
         prob = self.model.predict_proba(df)[0][1]
-        prediction = int(prob >= self.threshold)
 
         return {
             "probabilidade_compra": round(prob, 4),

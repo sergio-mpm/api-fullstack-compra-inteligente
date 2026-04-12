@@ -16,7 +16,7 @@ class Usuario(db.Model):
 
     clientes = db.relationship(
         "Cliente",
-        back_populates="cliente",
+        back_populates="usuario",
         cascade="all, delete-orphan"
     )
 

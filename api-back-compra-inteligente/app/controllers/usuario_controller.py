@@ -40,6 +40,7 @@ def cadastrar_usuario(body: UsuarioSchema):
 
 @usuario_bp.get(
     "/<string:cpf>",
+    security=[{"bearerAuth": []}],
     responses={200: UsuarioViewSchema, 404: ErrorSchema}
 )
 @jwt_required()

@@ -15,7 +15,8 @@ def create_app():
         version="1.0.0",
         description="API para uso do modelo preditivo de compras via e-commerce"
     )
-    app = OpenAPI(__name__, info=info, doc_prefix="/v1", security_schemes=bearer_auth)
+    security_schemes = {"bearerAuth": bearer_auth}
+    app = OpenAPI(__name__, info=info, doc_prefix="/v1", security_schemes=security_schemes)
 
     app.config.from_object(Config)
     CORS(app, resources={r"/*": {"origins": "*"}})
@@ -29,9 +30,7 @@ def create_app():
     from app.services.purchase_model_service import PurchaseModelService
     app.ml_model = PurchaseModelService()
 
-    # importacao de rotas para realização do migrate
-    # TO DO
-    from app.models import usuario
+    from app.models import usuario, cliente
 
     # registro de rotas
     from app.controllers.predicao_controller import predicao_bp
@@ -40,7 +39,6 @@ def create_app():
     app.register_api(usuario_bp)
     app.register_api(predicao_bp)
     app.register_api(auth_bp)
-    # TO DO
 
     app.security = [{"bearerAuth": []}]
 

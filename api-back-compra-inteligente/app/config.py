@@ -13,4 +13,5 @@ class Config:
     #### a chave a seguir é uma chave somente 
     #### para exemplo/execucao da API.
     #####################################################
-    ## JWT_SECRET_KEY =
+
+    JWT_SECRET_KEY = "6485b544eada569eabc5c8f0c0bc9ca6f8be596ad04ae0d3"

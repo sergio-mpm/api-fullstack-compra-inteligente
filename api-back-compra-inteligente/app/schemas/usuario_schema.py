@@ -23,6 +23,7 @@ class UsuarioViewSchema(BaseModel):
     cpf: str = "12345678900"
     nome: str = "João da Silva"
     email: str = "seuemail@email.com.br"
+    senha: str
     
     model_config = {
         "from_attributes": True
