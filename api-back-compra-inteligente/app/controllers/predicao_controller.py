@@ -24,7 +24,7 @@ service_predicao = PurchaseModelService()
     "/predizer",
     responses={200: PredicaoResponseSchema, 400: ErrorSchema}
 )
-@jwt_required()
+#@jwt_required()
 def predizer_compra(body: PredicaoSchema):
     """
         Avalia uma predição de compra baseado no modelo existente

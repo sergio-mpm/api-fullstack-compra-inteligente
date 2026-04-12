@@ -8,7 +8,7 @@ class UsuarioService:
         if not cpf or len(cpf) != 11:
             raise ValueError("CPF Inválido")
         
-        usuario = Usuario.query.get(data["cpf"])
+        usuario = db.session.get(Usuario, cpf)
         if usuario:
             raise ValueError("Usuário já cadastrado")
         
@@ -25,21 +25,21 @@ class UsuarioService:
         return Usuario.query.all()
     
     def obter_usuario(self, cpf: str) -> Usuario:
-        usuario = Usuario.query.get(cpf)
+        usuario = db.session.get(Usuario, cpf)
         if not usuario:
             raise ValueError("Usuario não encontrado")
         
         return usuario
     
     def obter_nome_usuario_por_cpf(self, cpf):
-        usuario = Usuario.query.get(cpf)
+        usuario = db.session.get(Usuario, cpf)
         if not usuario:
             raise ValueError("Usuario não encontrado")
         
         return usuario.nome
     
     def atualiza_cadastro_usuario(self, cpf: str, data: dict) -> Usuario:
-        usuario = Usuario.query.get(cpf)
+        usuario = db.session.get(Usuario, cpf)
         if not usuario:
             raise ValueError("Usuario não encontrado")
         
@@ -58,7 +58,7 @@ class UsuarioService:
         return usuario
 
     def excluir_usuario(self, cpf:str) -> None:
-        usuario = Usuario.query.get(cpf)
+        usuario = db.session.get(Usuario, cpf)
         if not usuario:
             raise ValueError("Usuario não encontrado")
         
