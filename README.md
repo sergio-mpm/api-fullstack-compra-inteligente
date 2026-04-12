@@ -62,6 +62,14 @@ Como mencionado anteriormente, o banco de dados foi construído para que pudéss
 
 O uso do token JWT que é fornecido ao usuário quando ele acessa o sistema permite com que o acesso ao sistema seja garantido somente a usuários que tiveram a sessão iniciada e fornecidos com um token de acesso, sendo que esse token também expira com o tempo. Garante-se assim que o sistema tenha uma camada de proteção para quaisquer acessos indevidos, sendo somente permitida a execução dos métodos no sistema aquele que tiver sido autenticado e possuir o token JWT.
 
+## Testes para a aplicação
+
+Foram criados na pasta 'tests' alguns casos de testes para garantir que o sistema esteja funcionando conforme esperado. Dentre os testes se encontram testes referentes aos thresholds estabelecidos, a importação do modelo treinado, a criação de token e a criação de usuários de sistema.
+
+Para executar os testes, basta utilizar o seguinte comando:
+
+--> python -m pytest
+
 ## Executando a aplicação
 
 Agora que temos nosso ambiente configurado, nosso banco de dados instanciado, devemos iniciar a aplicação backend. O comando a seguir irá iniciar a aplicação:
