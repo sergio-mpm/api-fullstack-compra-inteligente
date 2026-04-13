@@ -102,24 +102,24 @@ function logout() {
         text: "Você precisará fazer login novamente para acessar as predições.",
         icon: 'warning',
         showCancelButton: true,
-        confirmButtonColor: '#28a745', // Verde (combinando com seu card)
-        cancelButtonColor: '#dc3545',  // Vermelho
+        confirmButtonColor: '#28a745', 
+        cancelButtonColor: '#dc3545',  
         confirmButtonText: 'Sim, sair!',
         cancelButtonText: 'Cancelar',
-        reverseButtons: true // Coloca o "Sim" na direita, padrão de UX
+        reverseButtons: true 
     }).then((result) => {
         if (result.isConfirmed) {
-            // Se o usuário confirmou, limpa tudo
+            
             sessionStorage.removeItem('token');
             sessionStorage.removeItem('cpf');
             
-            // Garantindo que não sobrou nada no localStorage de testes antigos
+            
             localStorage.removeItem('token');
             localStorage.removeItem('cpf');
 
             usuarioLogado = null;
             
-            // Redireciona ou recarrega
+            
             location.reload();
         }
     });
@@ -139,7 +139,7 @@ function predizer() {
         return alert('Usuário não autenticado');
     }
 
-    // Captura dos dados do formulário
+    
     const payload = {
         age: Number(document.getElementById("age").value),
         gender: document.getElementById("gender").value,
@@ -151,7 +151,7 @@ function predizer() {
         cart_items: Number(document.getElementById("cart_items").value)
     };
 
-    // Chamada ao backend
+    
     fetch(`${baseUrl}/predicao/predizer`, {
         method: "POST",
         headers: {
@@ -161,7 +161,7 @@ function predizer() {
         body: JSON.stringify(payload)
     })
     .then(res => {
-        // Tratamento de erro específico para o status 422 (validação do Schema)
+        
         if (res.status === 422) {
             throw new Error("Erro de validação: Verifique se todos os campos foram preenchidos corretamente.");
         }
@@ -222,9 +222,9 @@ function renderResultado(data, payload) {
     const card = document.getElementById("resultadoCard");
     const titulo = document.getElementById("resultadoTitulo");
     const probTexto = document.getElementById("resultadoProb");
-    const dicaContainer = document.getElementById("dicaTexto"); // Certifique-se de ter esse ID no HTML
+    const dicaContainer = document.getElementById("dicaTexto");
 
-    // Reset de classes
+    
     card.className = "card mt-4";
 
     const label = data.faixa_conversao;
@@ -233,7 +233,7 @@ function renderResultado(data, payload) {
     titulo.innerText = label;
     probTexto.innerText = `Probabilidade estimada de compra: ${percentual}%`;
 
-    // Inserção da Dica Estratégica
+    
     const dicaSugestao = gerarDicaPersonalizada(payload, data);
     if (dicaContainer) {
         dicaContainer.innerHTML = `<strong>Estratégia Sugerida:</strong> ${dicaSugestao}`;

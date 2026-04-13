@@ -70,6 +70,8 @@ Para executar os testes, basta utilizar o seguinte comando:
 
 --> ```python -m pytest```
 
+Observação importante: O comando deve ser executado dentro da pasta api-back-compra-inteligente para que os testes sejam executados corretamente.
+
 ## Executando a aplicação
 
 Agora que temos nosso ambiente configurado, nosso banco de dados instanciado, devemos iniciar a aplicação backend. O comando a seguir irá iniciar a aplicação:

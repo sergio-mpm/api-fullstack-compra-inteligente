@@ -14,14 +14,11 @@ class AuthService:
         Autentica o usuário e retorna um JWT
         """
         try:
-            # Busca o usuário pelo service
             usuario = service_usuario.obter_usuario(cpf)
         except ValueError:
-            # Se o service lançar erro de "não encontrado", capturamos aqui
             raise ValueError("CPF e/ou senha inválidos")
 
         # Verificação segura:
-        # check_password_hash(hash_do_banco, senha_plana_do_front)
         if not usuario or not check_password_hash(usuario.senha, senha):
             raise ValueError("CPF e/ou senha inválidos")
 
